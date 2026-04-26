@@ -16,7 +16,7 @@ A BDD (Behavior-Driven Development) test automation framework built with Cucumbe
 ## Installation
 
 ```bash
-yarn add @automite/bdd-playwright-framework
+npm install @automite/bdd-playwright-framework
 ```
 
 ## Project Structure
@@ -50,7 +50,7 @@ The `BaseWorld` class extends Cucumber's World class and provides scenario conte
 - Resource cleanup
 
 ```typescript
-import { BaseWorld } from '@automite/bdd-playwright-framework';
+import { BaseWorld } from "@automite/bdd-playwright-framework";
 
 class CustomWorld extends BaseWorld {
   // Add custom scenario context
@@ -67,13 +67,13 @@ The `BasePage` class provides common page interaction methods:
 - Selector-based shortcuts (`click`, `fill`, `getText`)
 
 ```typescript
-import { BasePage } from '@automite/bdd-playwright-framework';
+import { BasePage } from "@automite/bdd-playwright-framework";
 
 class LoginPage extends BasePage {
   async login(username: string, password: string) {
-    await this.fill('#username', username);
-    await this.fill('#password', password);
-    await this.click('#login-button');
+    await this.fill("#username", username);
+    await this.fill("#password", password);
+    await this.click("#login-button");
   }
 }
 ```
@@ -88,7 +88,7 @@ Configures Cucumber lifecycle hooks with browser management:
 - `After`: Closes page after scenario
 
 ```typescript
-import { setupHooks, BaseWorld } from '@automite/bdd-playwright-framework';
+import { setupHooks, BaseWorld } from "@automite/bdd-playwright-framework";
 
 setupHooks(BaseWorld);
 ```
@@ -98,12 +98,12 @@ setupHooks(BaseWorld);
 Simple logging utility with multiple log levels:
 
 ```typescript
-import { logger } from '@automite/bdd-playwright-framework';
+import { logger } from "@automite/bdd-playwright-framework";
 
-logger.info('Information message');
-logger.error('Error message');
-logger.warn('Warning message');
-logger.debug('Debug message'); // Only when DEBUG=true
+logger.info("Information message");
+logger.error("Error message");
+logger.warn("Warning message");
+logger.debug("Debug message"); // Only when DEBUG=true
 ```
 
 ## Usage
@@ -114,7 +114,7 @@ logger.debug('Debug message'); // Only when DEBUG=true
 
 ```typescript
 // tests/support/CustomWorld.ts
-import { BaseWorld } from '@automite/bdd-playwright-framework';
+import { BaseWorld } from "@automite/bdd-playwright-framework";
 
 export class CustomWorld extends BaseWorld {
   // Add custom properties and methods
@@ -125,8 +125,8 @@ export class CustomWorld extends BaseWorld {
 
 ```typescript
 // tests/support/hooks.ts
-import { setupHooks } from '@automite/bdd-playwright-framework';
-import { CustomWorld } from './CustomWorld';
+import { setupHooks } from "@automite/bdd-playwright-framework";
+import { CustomWorld } from "./CustomWorld";
 
 setupHooks(CustomWorld);
 ```
@@ -135,13 +135,13 @@ setupHooks(CustomWorld);
 
 ```typescript
 // tests/pages/LoginPage.ts
-import { BasePage } from '@automite/bdd-playwright-framework';
+import { BasePage } from "@automite/bdd-playwright-framework";
 
 export class LoginPage extends BasePage {
   async login(username: string, password: string) {
-    await this.fill('#user-name', username);
-    await this.fill('#password', password);
-    await this.click('#login-button');
+    await this.fill("#user-name", username);
+    await this.fill("#password", password);
+    await this.click("#login-button");
   }
 }
 ```
@@ -150,18 +150,18 @@ export class LoginPage extends BasePage {
 
 ```typescript
 // tests/steps/login.steps.ts
-import { Given, When, Then } from '@cucumber/cucumber';
-import { CustomWorld } from '../support/CustomWorld';
-import { LoginPage } from '../pages/LoginPage';
+import { Given, When, Then } from "@cucumber/cucumber";
+import { CustomWorld } from "../support/CustomWorld";
+import { LoginPage } from "../pages/LoginPage";
 
-Given('I am on the login page', async function (this: CustomWorld) {
+Given("I am on the login page", async function (this: CustomWorld) {
   const loginPage = new LoginPage(this.page);
-  await loginPage.navigateToUrl('https://example.com/login');
+  await loginPage.navigateToUrl("https://example.com/login");
 });
 
-When('I enter credentials', async function (this: CustomWorld) {
+When("I enter credentials", async function (this: CustomWorld) {
   const loginPage = new LoginPage(this.page);
-  await loginPage.login('user@example.com', 'password');
+  await loginPage.login("user@example.com", "password");
 });
 ```
 
@@ -191,13 +191,13 @@ ENABLE_TRACING=false          # Enable Playwright tracing
 
 ```bash
 # Build the framework
-yarn build
+npm run build
 
 # Build in watch mode
-yarn dev
+npm run dev
 
 # Clean build artifacts
-yarn clean
+npm run clean
 ```
 
 ## Dependencies
@@ -210,7 +210,7 @@ yarn clean
 The framework is written in TypeScript and requires compilation before use:
 
 ```bash
-yarn build
+npm run build
 ```
 
 This compiles the TypeScript source files to the `dist` directory.

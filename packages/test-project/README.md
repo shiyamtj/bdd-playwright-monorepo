@@ -35,7 +35,6 @@ test-project/
 │   │   └── hooks.ts
 │   ├── config/                # Test configuration
 │   │   └── index.ts
-│   └── .instructions.md       # Development quick reference
 ├── .env                       # Environment variables (local)
 ├── .env.example               # Environment variables template
 ├── cucumber.js                # Cucumber configuration
@@ -50,8 +49,8 @@ test-project/
 
 ## Prerequisites
 
-- **Node.js** (v16 or higher)
-- **Yarn** package manager
+- **Node.js** (v20 or higher)
+- **npm** package manager (v10 or higher)
 - **@automite/bdd-playwright-framework** (local package)
 
 ## Installation
@@ -59,7 +58,7 @@ test-project/
 1. **Install dependencies:**
 
    ```bash
-   yarn install
+   npm install
    ```
 
    This will automatically install Playwright browsers via the `postinstall` script.
@@ -77,37 +76,37 @@ test-project/
 ### Run all tests
 
 ```bash
-yarn test
+npm run test
 ```
 
 ### Run smoke tests
 
 ```bash
-yarn test:smoke
+npm run test:smoke
 ```
 
 ### Run regression tests
 
 ```bash
-yarn test:regression
+npm run test:regression
 ```
 
 ### Run concurrent tests
 
 ```bash
-yarn test:concurrent
+npm run test:concurrent
 ```
 
 ### Clean test results
 
 ```bash
-yarn clean
+npm run clean
 ```
 
 ### Generate HTML report
 
 ```bash
-yarn report
+npm run report
 ```
 
 ## Test Scenarios
@@ -174,7 +173,7 @@ ENABLE_TRACING=false
 Base class for all page objects, providing common interaction methods:
 
 ```typescript
-import { BasePage } from '@automite/bdd-playwright-framework';
+import { BasePage } from "@automite/bdd-playwright-framework";
 
 class CustomPage extends BasePage {
   // Extend with page-specific methods
@@ -205,17 +204,23 @@ Handles inventory page interactions:
 Step definitions are organized by feature and located in `tests/steps/`:
 
 ```typescript
-import { Given, When, Then } from '@cucumber/cucumber';
-import { expect } from '@playwright/test';
-import { CustomWorld } from '../support/CustomWorld';
+import { Given, When, Then } from "@cucumber/cucumber";
+import { expect } from "@playwright/test";
+import { CustomWorld } from "../support/CustomWorld";
 
-Given('I navigate to the SauceDemo login page', async function (this: CustomWorld) {
-  await this.loginPage.goto();
-});
+Given(
+  "I navigate to the SauceDemo login page",
+  async function (this: CustomWorld) {
+    await this.loginPage.goto();
+  },
+);
 
-When('I enter username {string}', async function (this: CustomWorld, username: string) {
-  await this.loginPage.fillUsername(username);
-});
+When(
+  "I enter username {string}",
+  async function (this: CustomWorld, username: string) {
+    await this.loginPage.fillUsername(username);
+  },
+);
 ```
 
 ## Custom World
@@ -259,6 +264,7 @@ yarn report
 ```
 
 Reports are generated in the `reports/` directory with:
+
 - HTML report with test results
 - Screenshots on failure
 - Execution timeline
@@ -273,6 +279,7 @@ yarn test:concurrent
 ```
 
 This uses `run-tests.ts` to execute tests in parallel based on configuration files:
+
 - `run-commands-smoke.json` - Smoke test configuration
 - `run-commands-regression.json` - Regression test configuration
 
@@ -286,8 +293,6 @@ This uses `run-tests.ts` to execute tests in parallel based on configuration fil
 4. **Update CustomWorld** in `tests/support/CustomWorld.ts` (if new page)
 5. **Update hooks** in `tests/support/hooks.ts` (if new page)
 
-See `tests/.instructions.md` for detailed development guidelines.
-
 ### Tag Conventions
 
 - `@smoke` - Critical path tests
@@ -298,17 +303,17 @@ See `tests/.instructions.md` for detailed development guidelines.
 
 ## Scripts
 
-- `yarn test` - Run all Cucumber tests
-- `yarn test:smoke` - Run smoke tests (@smoke tag)
-- `yarn test:regression` - Run regression tests (@regression tag)
-- `yarn test:concurrent` - Run tests concurrently
-- `yarn clean` - Clean test results and reports
-- `yarn report` - Generate HTML report
-- `yarn uninstall-browsers` - Uninstall Playwright browsers
+- `npm run test` - Run all Cucumber tests
+- `npm run test:smoke` - Run smoke tests (@smoke tag)
+- `npm run test:regression` - Run regression tests (@regression tag)
+- `npm run test:concurrent` - Run tests concurrently
+- `npm run clean` - Clean test results and reports
+- `npm run report` - Generate HTML report
+- `npm run uninstall-browsers` - Uninstall Playwright browsers
 
 ## Dependencies
 
-- `@automite/bdd-playwright-framework`: * (local package)
+- `@automite/bdd-playwright-framework`: \* (local package)
 - `@cucumber/cucumber`: ^9.5.1
 - `@playwright/test`: ^1.40.1
 - `multiple-cucumber-html-reporter`: ^3.10.0 (dev)
@@ -337,7 +342,7 @@ ACTION_TIMEOUT=20000
 Run tests in headed mode:
 
 ```bash
-HEADLESS=false yarn test
+HEADLESS=false npm run test
 ```
 
 ## License

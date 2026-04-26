@@ -1,6 +1,6 @@
 # BDD Playwright Monorepo
 
-A monorepo containing a BDD test automation framework and a reference test implementation. Built with **CucumberJS**, **Playwright**, **TypeScript**, and **Yarn**.
+A monorepo containing a BDD test automation framework and a reference test implementation. Built with **CucumberJS**, **Playwright**, **TypeScript**, and **npm**.
 
 ## Overview
 
@@ -82,8 +82,8 @@ Reference implementation demonstrating framework usage with SauceDemo applicatio
 
 ## Prerequisites
 
-- **Node.js** (v16 or higher)
-- **Yarn** package manager
+- **Node.js** (v20 or higher)
+- **npm** package manager (v10 or higher)
 
 ## Installation
 
@@ -94,10 +94,10 @@ Reference implementation demonstrating framework usage with SauceDemo applicatio
    cd bdd-playwright-monorepo
    ```
 
-2. **Install dependencies using Yarn workspaces:**
+2. **Install dependencies using npm workspaces:**
 
    ```bash
-   yarn install
+   npm install
    ```
 
    This will install dependencies for both the framework and test-project packages.
@@ -115,53 +115,53 @@ Reference implementation demonstrating framework usage with SauceDemo applicatio
 ### Build the framework
 
 ```bash
-yarn build
+npm run build
 ```
 
 ### Build framework in watch mode
 
 ```bash
-yarn build:watch
+npm run build:watch
 ```
 
 ### Run tests
 
 ```bash
 # Run all tests
-yarn test
+npm run test
 
 # Run smoke tests
-yarn test:smoke
+npm run test:smoke
 
 # Run regression tests
-yarn test:regression
+npm run test:regression
 
 # Run concurrent tests
-yarn test:concurrent
+npm run test:concurrent
 ```
 
 ### Clean build artifacts and test results
 
 ```bash
-yarn clean
+npm run clean
 ```
 
 ### Generate test report
 
 ```bash
-yarn report
+npm run report
 ```
 
 ## Root Scripts
 
-- `yarn build` - Build the framework package
-- `yarn build:watch` - Build framework in watch mode
-- `yarn test` - Run all tests in test-project
-- `yarn test:smoke` - Run smoke tests
-- `yarn test:regression` - Run regression tests
-- `yarn test:concurrent` - Run tests concurrently
-- `yarn clean` - Clean all workspaces
-- `yarn report` - Generate HTML report for test-project
+- `npm run build` - Build the framework package
+- `npm run build:watch` - Build framework in watch mode
+- `npm run test` - Run all tests in test-project
+- `npm run test:smoke` - Run smoke tests
+- `npm run test:regression` - Run regression tests
+- `npm run test:concurrent` - Run tests concurrently
+- `npm run clean` - Clean all workspaces
+- `npm run report` - Generate HTML report for test-project
 
 ## Package-Specific Scripts
 
@@ -169,21 +169,21 @@ yarn report
 
 ```bash
 cd packages/framework
-yarn build        # Build TypeScript to dist/
-yarn dev          # Build in watch mode
-yarn clean        # Remove dist/ directory
+npm run build        # Build TypeScript to dist/
+npm run dev          # Build in watch mode
+npm run clean        # Remove dist/ directory
 ```
 
 ### Test Project Package
 
 ```bash
 cd packages/test-project
-yarn test                 # Run all Cucumber tests
-yarn test:smoke           # Run smoke tests
-yarn test:regression      # Run regression tests
-yarn test:concurrent      # Run tests concurrently
-yarn clean                # Clean test results and reports
-yarn report               # Generate HTML report
+npm run test                 # Run all Cucumber tests
+npm run test:smoke           # Run smoke tests
+npm run test:regression      # Run regression tests
+npm run test:concurrent      # Run tests concurrently
+npm run clean                # Clean test results and reports
+npm run report               # Generate HTML report
 ```
 
 ## Environment Variables
@@ -228,7 +228,7 @@ See [packages/test-project/README.md](packages/test-project/README.md) for compl
 - **CucumberJS** - BDD test framework
 - **Playwright** - Browser automation
 - **TypeScript** - Type-safe JavaScript
-- **Yarn Workspaces** - Monorepo management
+- **npm Workspaces** - Monorepo management
 - **multiple-cucumber-html-reporter** - HTML test reporting
 
 ## License
@@ -247,4 +247,3 @@ Contributions are welcome! Please feel free to submit issues or pull requests fo
 
 - [Framework Documentation](packages/framework/README.md) - Detailed framework API and usage
 - [Test Project Documentation](packages/test-project/README.md) - Reference implementation guide
-- [Development Instructions](packages/test-project/tests/.instructions.md) - Quick reference for test development
