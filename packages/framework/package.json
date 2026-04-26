@@ -1,0 +1,44 @@
+{
+  "name": "@automite/bdd-playwright-framework",
+  "version": "1.0.4",
+  "description": "BDD test automation framework using CucumberJS, Playwright, and TypeScript",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "yarn build",
+    "prepack": "yarn build",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "cucumber",
+    "playwright",
+    "typescript",
+    "bdd",
+    "automation",
+    "testing",
+    "framework"
+  ],
+  "author": "shiyamtj@gmail.com",
+  "license": "MIT",
+  "engines": {
+    "yarn": ">=1.22.0",
+    "npm": "please-use-yarn"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^9.5.1",
+    "@playwright/test": "^1.40.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

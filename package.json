@@ -1,0 +1,40 @@
+{
+  "name": "bdd-playwright-monorepo",
+  "version": "1.0.0",
+  "description": "BDD Playwright Framework Monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspace @automite/bdd-playwright-framework build",
+    "build:watch": "yarn workspace @automite/bdd-playwright-framework dev",
+    "test": "yarn workspace test-project test",
+    "test:smoke": "yarn workspace test-project test:smoke",
+    "test:regression": "yarn workspace test-project test:regression",
+    "test:concurrent": "yarn workspace test-project test:concurrent",
+    "clean": "yarn workspaces run clean",
+    "report": "yarn workspace test-project report",
+    "install:all": "yarn install"
+  },
+  "keywords": [
+    "cucumber",
+    "playwright",
+    "typescript",
+    "bdd",
+    "automation",
+    "testing",
+    "monorepo"
+  ],
+  "author": "shiyamtj@gmail.com",
+  "license": "MIT",
+  "engines": {
+    "yarn": ">=1.22.0",
+    "npm": "please-use-yarn"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  }
+}
