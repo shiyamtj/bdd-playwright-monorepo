@@ -11,8 +11,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "prepublishOnly": "yarn build",
-    "prepack": "yarn build",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build",
     "clean": "rm -rf dist"
   },
   "keywords": [
@@ -27,11 +27,11 @@
   "author": "shiyamtj@gmail.com",
   "license": "MIT",
   "engines": {
-    "yarn": ">=1.22.0",
-    "npm": "please-use-yarn"
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^9.5.1",
+    "@cucumber/cucumber": "^12.8.2",
     "@playwright/test": "^1.40.1"
   },
   "devDependencies": {
