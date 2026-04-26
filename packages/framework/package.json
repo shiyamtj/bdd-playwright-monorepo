@@ -1,6 +1,6 @@
 {
   "name": "@automite/bdd-playwright-framework",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "BDD test automation framework using CucumberJS, Playwright, and TypeScript",
   "private": false,
   "main": "dist/index.js",
