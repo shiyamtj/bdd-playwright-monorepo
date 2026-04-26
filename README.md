@@ -1,27 +1,84 @@
-# BDD Playwright Framework Test
+# BDD Playwright Monorepo
 
-Test implementation demonstrating the use of **@automite/bdd-playwright-framework**. Built with **CucumberJS**, **Playwright**, **TypeScript**, and **Yarn**.
+A monorepo containing a BDD test automation framework and a reference test implementation. Built with **CucumberJS**, **Playwright**, **TypeScript**, and **Yarn**.
+
+## Overview
+
+This monorepo consists of two main packages:
+
+- **@automite/bdd-playwright-framework** - Reusable BDD testing framework
+- **test-project** - Reference implementation demonstrating framework usage
 
 ## Project Structure
 
 ```
-bdd-playwright-framework-test/
-├── tests/                            # Test implementation
-│   ├── features/                     # Gherkin feature files
-│   ├── steps/                        # Step definitions
-│   ├── pages/                        # Page Object Models
-│   ├── config/                       # Application-specific config
-│   └── support/                      # Cucumber support code
-├── package.json                      # Project configuration
-├── .env.example                      # Environment variables template
-└── README.md                          # This file
+bdd-playwright-monorepo/
+├── packages/
+│   ├── framework/                    # BDD Playwright Framework package
+│   │   ├── src/
+│   │   │   ├── core/                 # Core framework components
+│   │   │   │   ├── BaseWorld.ts      # Custom World class
+│   │   │   │   ├── TestRunner.ts     # Test execution manager
+│   │   │   │   └── hooks.ts          # Cucumber lifecycle hooks
+│   │   │   ├── pages/                # Base Page class for POM
+│   │   │   └── utils/                # Logging utility
+│   │   ├── dist/                     # Compiled JavaScript
+│   │   └── package.json
+│   └── test-project/                 # Reference test implementation
+│       ├── tests/
+│       │   ├── features/             # Gherkin feature files
+│       │   ├── steps/                # Step definitions
+│       │   ├── pages/                # Page Object Models
+│       │   ├── support/              # Cucumber support code
+│       │   └── config/               # Test configuration
+│       ├── .env                      # Environment variables
+│       ├── cucumber.js               # Cucumber configuration
+│       └── package.json
+├── package.json                      # Root package configuration
+├── tsconfig.json                     # TypeScript configuration
+└── README.md                         # This file
 ```
 
-## Framework
+## Packages
 
-This project uses the [@automite/bdd-playwright-framework](https://github.com/automite/bdd-playwright-framework) package.
+### @automite/bdd-playwright-framework
 
-For framework documentation, see: https://github.com/automite/bdd-playwright-framework
+A reusable BDD test automation framework providing:
+
+- **BaseWorld** - Custom Cucumber World class for scenario context
+- **BasePage** - Base Page class for Page Object Model pattern
+- **setupHooks** - Pre-configured Cucumber lifecycle hooks
+- **Logger** - Simple logging utility
+- **TestRunner** - Test execution manager
+
+**Key Features:**
+
+- TypeScript support for type-safe test code
+- Browser lifecycle management via Playwright
+- Extensible architecture for custom implementations
+- Environment-based configuration
+
+**Documentation:** See [packages/framework/README.md](packages/framework/README.md)
+
+### test-project
+
+Reference implementation demonstrating framework usage with SauceDemo application:
+
+- **Feature files** - Gherkin scenarios for login, inventory, and cart
+- **Step definitions** - Mapped to Playwright actions
+- **Page objects** - LoginPage, InventoryPage implementations
+- **Custom World** - Application-specific context
+- **Test configuration** - Environment variables and Cucumber config
+
+**Key Features:**
+
+- Complete BDD test examples
+- Page Object Model implementation
+- HTML reporting with multiple-cucumber-html-reporter
+- Concurrent test execution support
+- Tag-based test organization (@smoke, @regression)
+
+**Documentation:** See [packages/test-project/README.md](packages/test-project/README.md)
 
 ## Prerequisites
 
@@ -30,103 +87,164 @@ For framework documentation, see: https://github.com/automite/bdd-playwright-fra
 
 ## Installation
 
-1. **Clone or navigate to the project:**
+1. **Clone the repository:**
 
    ```bash
-   cd bdd-playwright-framework-test
+   git clone <repository-url>
+   cd bdd-playwright-monorepo
    ```
 
-2. **Install dependencies using Yarn:**
+2. **Install dependencies using Yarn workspaces:**
 
    ```bash
    yarn install
    ```
 
-3. **Set up environment variables:**
+   This will install dependencies for both the framework and test-project packages.
+
+3. **Set up environment variables for test-project:**
 
    ```bash
-   cp .env.example .env
+   cp packages/test-project/.env.example packages/test-project/.env
    ```
 
-   The `.env` file includes:
-   - `BASE_URL`: Target application URL (default: https://www.saucedemo.com)
-   - `BROWSER`: Browser to use (chromium, firefox, webkit)
-   - `HEADLESS`: Run browser in headless mode (true/false)
-   - `SLOW_MO`: Slow down actions (in milliseconds)
-   - Test credentials for the SauceDemo application
+   Edit the `.env` file with your configuration (see test-project documentation).
 
-## Running Tests
+## Development
 
-### Run all tests
+### Build the framework
 
 ```bash
+yarn build
+```
+
+### Build framework in watch mode
+
+```bash
+yarn build:watch
+```
+
+### Run tests
+
+```bash
+# Run all tests
 yarn test
-```
 
-### Run smoke tests
-
-```bash
+# Run smoke tests
 yarn test:smoke
-```
 
-### Run regression tests
-
-```bash
+# Run regression tests
 yarn test:regression
-```
 
-### Run concurrent tests
-
-```bash
+# Run concurrent tests
 yarn test:concurrent
 ```
 
-### Clean test results
+### Clean build artifacts and test results
 
 ```bash
 yarn clean
 ```
 
-### Generate report
+### Generate test report
 
 ```bash
 yarn report
 ```
 
-## Scripts
+## Root Scripts
 
-- `yarn test` - Run all tests
+- `yarn build` - Build the framework package
+- `yarn build:watch` - Build framework in watch mode
+- `yarn test` - Run all tests in test-project
 - `yarn test:smoke` - Run smoke tests
 - `yarn test:regression` - Run regression tests
 - `yarn test:concurrent` - Run tests concurrently
-- `yarn clean` - Clean test results and reports
-- `yarn report` - Generate HTML report
+- `yarn clean` - Clean all workspaces
+- `yarn report` - Generate HTML report for test-project
+
+## Package-Specific Scripts
+
+### Framework Package
+
+```bash
+cd packages/framework
+yarn build        # Build TypeScript to dist/
+yarn dev          # Build in watch mode
+yarn clean        # Remove dist/ directory
+```
+
+### Test Project Package
+
+```bash
+cd packages/test-project
+yarn test                 # Run all Cucumber tests
+yarn test:smoke           # Run smoke tests
+yarn test:regression      # Run regression tests
+yarn test:concurrent      # Run tests concurrently
+yarn clean                # Clean test results and reports
+yarn report               # Generate HTML report
+```
 
 ## Environment Variables
 
-Framework configuration via environment variables:
+### Framework Configuration
+
+Configure the framework using environment variables:
 
 ```bash
 # Browser configuration
-BROWSER=chromium
-HEADLESS=true
-SLOW_MO=0
-VIEWPORT_WIDTH=1280
-VIEWPORT_HEIGHT=720
-VIEWPORT_PRESET=desktop
+BROWSER=chromium              # Browser type (chromium, firefox, webkit)
+HEADLESS=true                 # Run in headless mode
+SLOW_MO=0                     # Slow down actions (ms)
+VIEWPORT_WIDTH=1280           # Viewport width
+VIEWPORT_HEIGHT=720           # Viewport height
+VIEWPORT_PRESET=desktop       # Viewport preset
 
 # Timeouts
-NAVIGATION_TIMEOUT=30000
-ACTION_TIMEOUT=10000
+NAVIGATION_TIMEOUT=30000     # Navigation timeout (ms)
+ACTION_TIMEOUT=10000         # Action timeout (ms)
 
-# Tracing
-ENABLE_TRACING=false
+# Debugging
+DEBUG=true                    # Enable debug logs
+ENABLE_TRACING=false          # Enable Playwright tracing
 ```
+
+### Test Project Configuration
+
+Test project specific environment variables (in `packages/test-project/.env`):
+
+```bash
+BASE_URL=https://www.saucedemo.com
+VALID_USERNAME=standard_user
+VALID_PASSWORD=secret_sauce
+# ... additional test credentials
+```
+
+See [packages/test-project/README.md](packages/test-project/README.md) for complete configuration.
+
+## Technology Stack
+
+- **CucumberJS** - BDD test framework
+- **Playwright** - Browser automation
+- **TypeScript** - Type-safe JavaScript
+- **Yarn Workspaces** - Monorepo management
+- **multiple-cucumber-html-reporter** - HTML test reporting
 
 ## License
 
 MIT
 
+## Author
+
+shiyamtj@gmail.com
+
 ## Contributing
 
-Feel free to extend the test implementation with additional features, page objects, and test scenarios.
+Contributions are welcome! Please feel free to submit issues or pull requests for either the framework or test-project packages.
+
+## Documentation
+
+- [Framework Documentation](packages/framework/README.md) - Detailed framework API and usage
+- [Test Project Documentation](packages/test-project/README.md) - Reference implementation guide
+- [Development Instructions](packages/test-project/tests/.instructions.md) - Quick reference for test development

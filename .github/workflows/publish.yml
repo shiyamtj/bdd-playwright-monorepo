@@ -1,4 +1,4 @@
-name: Publish to npm
+name: Publish Framework to npm
 
 on:
   push:
@@ -31,6 +31,6 @@ jobs:
         run: yarn build
 
       - name: Publish to npm
-        run: npm publish --access public --provenance
+        run: yarn workspace @automite/bdd-playwright-framework npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
