@@ -26,6 +26,10 @@
   ],
   "author": "shiyamtj@gmail.com",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shiyamtj/bdd-playwright-monorepo.git"
+  },
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=10.0.0"
